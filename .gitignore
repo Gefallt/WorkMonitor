@@ -1,0 +1,12 @@
+# Python
+__pycache__/
+*.pyc
+
+# 入力テキスト
+input/*.txt
+
+# VBA版Excel
+WorkListVBA.xlsm
+
+# 実データExcel
+data/WorkList.xlsx

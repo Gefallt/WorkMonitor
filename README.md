@@ -10,23 +10,23 @@ Excelファイルへ日次履歴として保存するツールです。
 - 環境名<br>
 を取得し、
 `WorkList.xlsx`
-へ日付単位のシートを作成します。
+へ日付単位のシートを作成します。<br>
 さらに前日データと比較して、
 - 初回稼働日
-- 連続稼働日数
+- 連続稼働日数<br>
 を自動計算します。
 
 ---
 
 ## フォルダ構成
 
-WorkMonitor 
-├─ main.py 
-├─ README.md 
-├─ .gitignore 
-│ ├─ input 
-│ └─ teams_yyyymmdd.txt 
-│ └─ data └─ WorkList.xlsx
+WorkMonitor<br> 
+├─ main.py<br> 
+├─ README.md<br> 
+├─ .gitignore<br> 
+│ ├─ input<br> 
+│ └─ teams_yyyymmdd.txt<br> 
+│ └─ data └─ WorkList.xlsx<br>
 
 ---
 
@@ -36,16 +36,21 @@ WorkMonitor
 
 例
 
-2025年09月02日 稼働環境一覧
-東京 環境A
-大阪 環境B
-名古屋 環境C
+2025年09月02日 稼働環境一覧<br>
+東京 <br>
+環境A<br>
+大阪 <br>
+環境B<br>
+名古屋 <br>
+環境C<br>
 
 形式
 
-日付
-拠点 環境名
-拠点 環境名
+日付<br>
+拠点<br> 
+環境名<br>
+拠点<br> 
+環境名<br>
 ・・・
 
 ---
@@ -101,12 +106,12 @@ input 20250902 20250901 20250831
 
 実行結果例
 
-処理日: 20250902 
-前日シート発見: 20250901
-WorkList.xlsx 更新完了 
-シート名 : 20250902 
-件数 : 12 
-3日以上連続稼働: 4件
+処理日: 20250902 <br>
+前日シート発見: 20250901<br>
+WorkList.xlsx 更新完了 <br>
+シート名 : 20250902 <br>
+件数 : 12 <br>
+3日以上連続稼働: 4件<br>
 
 ---
 
@@ -121,10 +126,8 @@ python main.py
 ---
 
 ## GitHub Codespaces
-Codespacesでも実行可能です。
-python main.py
-
-実行前に
+Codespacesでも実行可能です。<br>
+python main.py実行前に
 input/teams_yyyymmdd.txt
 を配置してください。
 

@@ -1,6 +1,7 @@
 import re
 from pathlib import Path
 from openpyxl import Workbook, load_workbook
+from openpyxl.styles import Font, PatternFill, Alignment
 from datetime import datetime, timedelta
 
 # ========================================
@@ -94,6 +95,15 @@ headers = [
     ("連続稼働日数", 12)
 ]
 
+header_font = Font(bold=True)
+
+header_fill = PatternFill(
+    fill_type="solid",
+    fgColor="D9D9D9"
+)
+
+header_alignment = Alignment(horizontal="center")
+
 for col_no, (header_text, width) in enumerate(headers, start=1):
 
     cell = ws.cell(
@@ -102,9 +112,17 @@ for col_no, (header_text, width) in enumerate(headers, start=1):
         value=header_text
     )
 
+    # ヘッダー書式
+    cell.font = header_font
+    cell.fill = header_fill
+    cell.alignment = header_alignment
+
     # 列幅設定
     column_letter = cell.column_letter
     ws.column_dimensions[column_letter].width = width
+
+# ヘッダー固定
+ws.freeze_panes = "A2"
         
 # ========================================
 # 前日シート取得

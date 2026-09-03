@@ -11,3 +11,8 @@ WorkListVBA.xlsm
 # 実データExcel
 data/WorkList.xlsx
 data/WorkList - コピー.xlsx
+
+# Visual Studio
+.vs/
+*.suo
+*.user

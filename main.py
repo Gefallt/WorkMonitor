@@ -1,6 +1,8 @@
 import re
 from pathlib import Path
 from openpyxl import Workbook, load_workbook
+from openpyxl.styles import PatternFill                    # add20260904
+from openpyxl.formatting.rule import FormulaRule           # add20260904-2
 from datetime import datetime, timedelta
 
 # ========================================
@@ -105,7 +107,14 @@ for col_no, (header_text, width) in enumerate(headers, start=1):
     # 列幅設定
     column_letter = cell.column_letter
     ws.column_dimensions[column_letter].width = width
-        
+# >>>20260904        
+# 3日以上用の黄色背景
+# yellow_fill = PatternFill(
+#    fill_type="solid",
+#    start_color="FFFF00",
+#    end_color="FFFF00"
+# )
+# <<<20260904
 # ========================================
 # 前日シート取得
 # ========================================
@@ -189,7 +198,6 @@ for i in range(1, len(lines), 2):
         ws.cell(excel_row, 5, 1)
 
     excel_row += 1
-
 # ========================================
 # 保存
 # ========================================
@@ -201,7 +209,28 @@ for row in range(2, ws.max_row + 1):
     days = ws.cell(row, 5).value
 
     if days >= 3:
+
         alert_count += 1
+# >>>20260904
+#        for col in range(1, 6):
+#            ws.cell(row, col).fill = yellow_fill
+# <<<20260904
+# >>>20260904-2
+# 条件付き書式
+yellow_fill = PatternFill(
+    start_color="FFFF00",
+    end_color="FFFF00",
+    fill_type="solid"
+)
+
+ws.conditional_formatting.add(
+    f"A2:E{ws.max_row}",
+    FormulaRule(
+        formula=["$E2>=3"],
+        fill=yellow_fill
+    )
+)
+# <<<20260904-2
 
 wb.save(EXCEL_FILE)
 

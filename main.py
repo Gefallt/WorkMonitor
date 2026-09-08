@@ -1,7 +1,7 @@
 import re
 from pathlib import Path
 from openpyxl import Workbook, load_workbook
-from openpyxl.styles import Font, PatternFill, Alignment
+from openpyxl.styles import Font, PatternFill, Alignment   # add20260903
 from openpyxl.formatting.rule import FormulaRule           # add20260904-2
 from datetime import datetime, timedelta
 
@@ -121,10 +121,10 @@ for col_no, (header_text, width) in enumerate(headers, start=1):
     # 列幅設定
     column_letter = cell.column_letter
     ws.column_dimensions[column_letter].width = width
-
+# >>>20260903
 # ヘッダー固定
 ws.freeze_panes = "A2"
-        
+# <<<20260903        
 # >>>20260904        
 # 3日以上用の黄色背景
 # yellow_fill = PatternFill(
@@ -240,14 +240,56 @@ yellow_fill = PatternFill(
     end_color="FFFF00",
     fill_type="solid"
 )
+# >>>20260908
+orange_fill = PatternFill(
+    start_color="FFA500",
+    end_color="FFA500",
+    fill_type="solid"
+)
 
+red_fill = PatternFill(
+    start_color="FF0000",
+    end_color="FF0000",
+    fill_type="solid"
+)
+
+target_range = f"A2:E{ws.max_row}"
+
+# 3日
 ws.conditional_formatting.add(
-    f"A2:E{ws.max_row}",
+    target_range,
     FormulaRule(
-        formula=["$E2>=3"],
+        formula=["$E2=3"],
         fill=yellow_fill
     )
 )
+
+# 4日
+ws.conditional_formatting.add(
+    target_range,
+    FormulaRule(
+        formula=["$E2=4"],
+        fill=orange_fill
+    )
+)
+
+# 5日以上
+ws.conditional_formatting.add(
+    target_range,
+    FormulaRule(
+        formula=["$E2>=5"],
+        fill=red_fill
+    )
+)
+
+# ws.conditional_formatting.add(
+#    f"A2:E{ws.max_row}",
+#    FormulaRule(
+#        formula=["$E2>=3"],
+#        fill=yellow_fill
+#    )
+# )
+# <<<20260908
 # <<<20260904-2
 
 wb.save(EXCEL_FILE)

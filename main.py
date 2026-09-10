@@ -292,6 +292,27 @@ ws.conditional_formatting.add(
 # <<<20260908
 # <<<20260904-2
 
+# >>>20260909
+#for s in wb.worksheets:
+#    print(
+#        s.title,
+#        s.sheet_view.tabSelected
+#    )
+# 全シートの選択解除
+# for s in wb.worksheets:
+#    s.sheet_view.tabSelected = False
+
+# 今回作成したシートだけ選択
+# ws.sheet_view.tabSelected = True
+
+# 今回作成したシートを選択
+# wb.active = wb.index(ws)
+
+# 左から３番目のシート選択を解除（つまり、実行前なら左から２番目）
+wb.worksheets[2].sheet_view.tabSelected = False
+
+# <<<20260909
+
 wb.save(EXCEL_FILE)
 
 print("WorkList.xlsx 更新完了")
